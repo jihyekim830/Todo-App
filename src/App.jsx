@@ -53,7 +53,7 @@ function TodoList({ todoList, setTodoList }) {
 }
 
 function Todo({ todo, setTodoList }) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(todo.content);
   const [isEditing, setIsEditing] = useState(false);
   const [isCompleted, setIsCompleted] = useState(todo.complete);
 
