@@ -3,9 +3,9 @@ import './App.css';
 
 function App() {
   const [todoList, setTodoList] = useState([
-    { id: 0, content: '123' },
-    { id: 1, content: '코딩 공부하기' },
-    { id: 2, content: '잠 자기' },
+    { id: 0, content: '123', complete: false },
+    { id: 1, content: '코딩 공부하기', complete: false },
+    { id: 2, content: '잠 자기', complete: false },
   ]);
 
   return (
@@ -55,11 +55,24 @@ function TodoList({ todoList, setTodoList }) {
 function Todo({ todo, setTodoList }) {
   const [inputValue, setInputValue] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(todo.complete);
 
   return (
     <li>
       <div className="todo-content">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          onChange={() => {
+            setIsCompleted((prev) => !prev);
+            setTodoList((prev) =>
+              prev.map((el) =>
+                el.id === todo.id ? { ...el, complete: !el.complete } : el
+              )
+            );
+            console.log(todo);
+          }}
+        />
         {!isEditing && <span>{todo.content}</span>}
         {isEditing && (
           <input
